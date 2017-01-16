@@ -1,9 +1,9 @@
 class AlbumsController < ApplicationController
-  load_resource only: :show
+  load_recource only: :show
+  before_action :set_attributes, only: :create
 
   def show
-  load_and_authorize_resource only: [:new, :create]
-  before_action :set_attributes, only: :create
+  end 
 
   def new
   end
