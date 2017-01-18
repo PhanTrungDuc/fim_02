@@ -11,9 +11,7 @@
     </div>
     <div class="user-action">
       <span class="glyphicon glyphicon-cog"></span>
-      <%= link_to t(".edit-profile"), "#" %> |
-      <span class="glyphicon glyphicon-wrench"></span>
-      <%= link_to t(".change-password"), "#" %>
+      <%= link_to t(".edit-profile"), edit_user_registration_path %> |
     </div>
   </div>
   <div class="col-md-8">
@@ -23,5 +21,6 @@
       </div>
     </div>
   </div>
-  <%= link_to t(".submit"), new_album_path(@user) %>
+  <h1><%= t ".my_favorite_song" %></h1>
+  <%= render "list_favorite_songs" %>
 </div>

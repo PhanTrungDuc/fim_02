@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+  <a class="panel-body">
+    <div class="audio-player">
+      <audio id="audio-player" src="<%= @favorite_songs.first.url_content %>"
+        type="audio/mp3" controls="controls" autoplay></audio>
+    </div>
+  </a>
+  <ul class="list-group">
+    <% @favorite_songs.each do |song| %>
+      <li class="list-group-item">
+        <%= link_to song.name, song_path(song), data: song.url_content %>
+      </li>
+    <% end %>
+  </ul>
+</div>

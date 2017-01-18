@@ -241,6 +241,7 @@ en:
       error: "Error"
     unfavorite: "Unfavorite"
     fravorite: "Favorite"
+    my_favorite_song: "My Favorite Song"
   helper:
     approved: "Approved"
     pending: "Pending"
