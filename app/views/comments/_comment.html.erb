@@ -1,11 +1,11 @@
 <li>
-  <small>
+<!--   <small>
     <p><%= comment.user.name %></p>
     <%= time_ago_in_words(comment.created_at) + t(".ago") %>
   </small>
   <blockquote>
     <p><%= comment.content %></p>
-  </blockquote>
+  </blockquote> -->
   <% if comment.root? %>
     <p>
       <%= link_to t(".reply"), new_polymorphic_path([@commentable, comment],

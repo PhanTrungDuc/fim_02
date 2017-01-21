@@ -2,3 +2,5 @@
 <% if @comment.parent && @comment.parent.depth %>
   <%= render "comment", comment: @comment.parent %>
 <% end %>
+$('.reply-<%= @parent_comment.id %>')
+.html('<%= j render "comments/form" %>');

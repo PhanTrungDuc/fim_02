@@ -9,11 +9,11 @@ class CommentsController < ApplicationController
   def create
     @comment = @commentable.comments.build comment_params
     if @comment.save
-      flash.now[:success] = t "flash.create_success"
-    else
-      flash[:danger] = @comment.errors.full_messages.join("/ ")
+       respond_to do |format|
+        format.js
+        format.html {redirect_to :back}
+      end
     end
-    redirect_to @commentable
   end
 
   def destroy
