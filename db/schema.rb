@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170119154355) do
+ActiveRecord::Schema.define(version: 20170205113735) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "user_id"
@@ -177,6 +177,27 @@ ActiveRecord::Schema.define(version: 20170119154355) do
     t.float    "overall_avg",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "playlists", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "views",               default: 0
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_playlists_on_user_id"
+  end
+
+  create_table "playlists_songs", id: false, force: :cascade do |t|
+    t.integer "song_id",     null: false
+    t.integer "playlist_id", null: false
+    t.index ["playlist_id", "song_id"], name: "index_playlists_songs_on_playlist_id_and_song_id"
+    t.index ["song_id", "playlist_id"], name: "index_playlists_songs_on_song_id_and_playlist_id"
   end
 
   create_table "rates", force: :cascade do |t|

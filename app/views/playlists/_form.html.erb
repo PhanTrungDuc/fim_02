@@ -1,0 +1,37 @@
+<%= form_for(@playlist) do |f| %>
+  <% if @playlist.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger setlist-alert">
+      <h2><%= pluralize(@playlist.errors.count, "error") %> prohibited this playlist from being saved:</h2>
+
+      <ul>
+      <% @playlist.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <ul class="list-group">
+    <%= f.collection_check_boxes :song_ids, Song.all, :name, :id do |ff| %>
+      <li class="list-group-item">
+        <%= ff.check_box %>
+        <%= ff.object.name%>
+      </li>
+    <% end %>
+  </ul>
+  </div>
+
+  <div class="actions">
+    <%= f.submit buttontext.to_s, class: "btn btn-lg btn-primary" %>
+  </div>
+<% end %>

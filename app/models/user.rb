@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :lyrics, dependent: :destroy
   has_many :activities, dependent: :destroy
   has_many :favourites, as: :favouritable, dependent: :destroy
+  has_many :playlists, dependent: :destroy
+  has_many :songs, dependent: :destroy
 
   accepts_nested_attributes_for :albums
   

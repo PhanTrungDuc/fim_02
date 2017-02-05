@@ -10,11 +10,14 @@ class Song < ApplicationRecord
   has_many :album_songs
   has_many :albums, through: :album_songs
 
+  belongs_to :user
+
   validates :name, presence: true
   validates :url_content, presence: true
   validates :composer_id, presence: true
   validates :singer_id, presence: true
   validates :category_id, presence: true
+  has_and_belongs_to_many :playlists
 
   ratyrate_rateable "evaluation"
   is_impressionable counter_cache: true, column_name: :views
