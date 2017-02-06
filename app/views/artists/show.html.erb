@@ -1,19 +1,62 @@
-<h1><%= t ".heading" %></h1>
-<div class="row">
-  <div class="col-md-4">
-    <div class="user-profile">
-      <h3><%= t ".user-info" %></h3>
-      <div class="w3-display-container">
-        <%= image_tag @artist.avatar.url(:medium) %>
-        <div class="w3-display-bottomleft w3-container w3-text-black">
-          <h3><%= @artist.name %></h3>
+<div class="wrapper-page">
+  <div class="full-banner">
+    <%= image_tag "https://goo.gl/VKaMwk" %>
+    <div class="box-info-artist">
+      <div class="info-artist fluid">
+        <div class="inside">
+          <% if @artist.avatar? %>
+            <%= image_tag @artist.avatar.url %>
+          <% else %>
+            <%= image_tag "http://zmp3-photo.d.za.zdn.vn/skins/zmp3-v4/images/default2/220x220.jpg" %>
+          <% end %>
+          <div class="info-summary">
+            <h2><%= @artist.name %></h2>
+          </div>
         </div>
       </div>
-      <span class="glyphicon glyphicon-envelope"></span>
-      <%= @artist.type_of_music %><br/>
-      <span class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme">
-      <%= @artist.date_of_birth %><br/>
-      </span>
     </div>
   </div>
-</div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="title">
+        <i class="fa fa-caret-square-o-right"></i> <%= link_to t(".Songs"), "#" %>
+      </h3>
+      <ul class="list-group full-width">
+        <% @supports.load_songs(@artist).each.with_index 1 do |song, index| %>
+          <li id="song<%= song.id %>" class="song-item fn-song" data-type="song" data-id="<%= song.id %>">
+            <%= index %>. <%= link_to song.name, song_path(song) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="title">
+        <i class="fa fa-caret-square-o-right"></i> <%= link_to t(".Albums"), "#" %>
+      </h3>
+      <ul class="list-group full-width">
+        <% @supports.load_albums(@artist).each do |album| %>
+          <div class="album-item col-md-3" >
+            <%= link_to album_path(album) do %>
+              <% if album.avatar? %>
+                <%= image_tag album.avatar.url %>
+              <% else %>
+                <%= image_tag "https://goo.gl/8sE6vq" %>
+              <% end %>
+            <% end %>
+            <div class="des">
+              <h4 class="title-item txt-primary ellipsis">
+                <%= link_to album_path(album) do %>
+                  <%= album.name %>
+                <% end %>
+              </h4>
+              <%= link_to artist_path(@artist) do %>
+                <h5 class="txt-info fn-artist"><%= @artist.name %></h5>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </ul>
+    </div>
+  </div>

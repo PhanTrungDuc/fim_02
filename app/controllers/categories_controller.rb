@@ -4,6 +4,6 @@ class CategoriesController < ApplicationController
   def index
     @search = Category.search params[:q]
     @categories = @search.result
+    @category = Category.all
   end
-
 end

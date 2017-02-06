@@ -3,45 +3,51 @@
     <div class="sidebar fn-sidebar-fixed">
       <ul class="data-list">
         <li class="active">
-          <h3><%= t "artist.hotartist"%></h3>
+          <h3><a>Categories</a></h3>
         </li>
       </ul>
       <div class="fn-scrollbar mCustomScrollbar _mCS_1 mCS-autoHide">
         <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_outside" tabindex="0">
-          <div id="mCSB_1_container" class="mCSB_container">
+          <div id="mCSB_1_container" class="mCSB_container" >
             <ul class="data-list">
-              <% @music_types.each do |type| %>
-                <li class=""><%= link_to "#{type}", ("#"+"#{type}") %></li>
+              <% @category.each do |category| %>
+                <li class="">
+                  <%= link_to category.name, "#"+"#{category.name}" %>       
+                </li>
               <% end %>
             </ul>
           </div>
         </div>
       </div>
     </div>
-    <% @music_types.each do |type| %>
+    <% @category.each do |type| %>
       <div class="zcontent">
-        <h2 class="title-section" id="<%= type %>">
-          <%= link_to "#{type}" %>
-          <i class="icon-arrow"></i>
+        <h2 class="title-section" id="<%= type.name %>">
+          <%= link_to "#{type.name}" %>
         </h2>
         <div class="tab-pane">
           <div class="row">
-            <% @artists.each do |artist| %>
-              <% if artist.type_of_music == type %>
+            <% Song.all.each do |song| %>
+              <% if song.category == type %>
                 <div class="pone-of-four">
                   <div class="item">
-                    <%= link_to artist_path(artist) do %>
-                      <% if artist.avatar? %>
-                        <%= image_tag artist.avatar.url %>
+                    <%= link_to song_path(song) do %>
+                      <% if song.artist.avatar? %>
+                        <%= image_tag song.artist.avatar.url %>
                       <% else %>
                         <%= image_tag "http://zmp3-photo.d.za.zdn.vn/skins/zmp3-v4/images/default2/220x220.jpg" %>
                       <% end %>
-                    <% end %>
+                    <%end%>
+                      <span class="icon-circle-play otr"></span>
+                    </a>
                   </div>
                   <div class="description">
                     <h4 class="title-item ellipsis">
-                      <%= link_to artist.name, artist_path(artist) %>
+                      <%= link_to song.name, song_path(song) %>
                     </h4>
+                    <div class="inblock ellipsis">
+                      <%= link_to song.artist.name, artist_path(song.artist) %>
+                    </div>
                   </div>
                 </div>
               <% end %>

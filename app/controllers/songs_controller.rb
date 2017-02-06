@@ -26,5 +26,4 @@ class SongsController < ApplicationController
   def load_albums
     @albums = Album.all
   end
-
 end

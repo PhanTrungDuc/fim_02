@@ -1,7 +1,18 @@
 class Supports::Artist
-  attr_reader :artist
+  attr_reader :artist, :songs, :albums
 
-  def initialize params = {}
+  def initialize songs, albums
+    @songs = songs
+    @albums = albums
+    @artist = artist
+  end
+
+  def load_albums artist
+    @albums ||= Album.belongs_to_artist artist.id
+  end
+
+  def load_songs artist
+    @songs ||= Song.where artist_id: artist.id
   end
 
   def type_of_musics

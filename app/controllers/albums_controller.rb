@@ -4,7 +4,7 @@ class AlbumsController < ApplicationController
 
   before_action :set_attributes, only: :create
   before_action :album_support, only: :show
-  before_action :load_albums, only: :show
+  before_action :load_albums, only: [:show, :index]
 
   def index
     @search = Album.search params[:q]
@@ -41,5 +41,6 @@ class AlbumsController < ApplicationController
 
   def load_albums
     @albums = Album.all
+    @music_types = Artist.type_of_musics.keys
   end
 end

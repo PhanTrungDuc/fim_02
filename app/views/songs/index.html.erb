@@ -1,12 +1,23 @@
-<h1><%= t ".heading" %></h1>
-<%= render "search_form" %>
-<table class="table table-hover">
-  <th><%= t ".name" %></th>
-  <% @songs.each do |song| %>
-    <tr>
-      <li class="list-group-item">
-        <%= link_to song.name, song_path(song), data: song.url_content %>
-      </li>
-    </tr>
-  <% end %>
-</table>
+<div class="wrapper-page">
+  <div class="row">
+    <h2 id="song"><%= link_to "Songs" %></h2>
+    <% @songs.each do |song| %>
+      <% @singer = Artist.find(song.singer_id) %>
+      <div class="col-sm-3">
+        <%= link_to song_path(song) do %>
+          <div class="well div-item">
+            <% if @singer.avatar? %>
+              <%= image_tag @singer.avatar.url %>
+            <% else %>
+              <%= image_tag "https://goo.gl/4mFlcK" %>
+            <% end %>
+          </div>
+        <% end %>
+        <%= link_to song_path(song) do %>        
+          <h4><%= song.name %></h4>
+        <% end %>  
+        <%= link_to @singer.name, artist_path(@singer) %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -281,3 +281,8 @@ en:
       contribute: "Contribute"
       rate_this: "Rate This"
       albums: "Other Albums"
+      hotalbum: "TYPE"
+      album: "Albums"
+      lyric: "Lyrics"
+  artist: 
+    hotartist: "ARTISTS"

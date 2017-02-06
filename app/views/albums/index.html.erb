@@ -1,9 +1,53 @@
-<h1><%= t ".heading" %></h1>
-<table class="table table-hover">
-  <% @albums.each do |album| %>
-    <tr>
-      <li> <%= link_to album.name, album_path(album)%> </li>
-    </tr>
-    <%= image_tag album.avatar.url(:medium) %>
-  <% end %>
-</table>
+<div class="wrapper-page" >
+  <div class="wrap-2-col">
+    <div class="sidebar fn-sidebar-fixed">
+      <ul class="data-list">
+        <li class="active">
+          <h3><%= t"albums.show.hotalbum" %></h3>
+        </li>
+      </ul>
+      <div class="fn-scrollbar mCustomScrollbar _mCS_1 mCS-autoHide">
+        <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_outside" tabindex="0">
+          <div id="mCSB_1_container" class="mCSB_container">
+            <ul class="data-list">
+              <% @music_types.each do |type| %>
+                <li class=""><%= link_to "#{type}"%></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="zcontent">
+      <h2 class="title-section">
+        <p><%= t"albums.show.album"%><i class="icon-arrow"></i></p>
+      </h2>
+      <div class="tab-pane">
+        <div class="row">
+          <% @albums.each do |album| %>
+            <div class="pone-of-four">
+              <div class="item">
+                <%= link_to album_path(album) do %>
+                  <% if album.avatar? %>
+                    <%= image_tag album.avatar.url %>
+                  <% else %>
+                    <%= image_tag "https://goo.gl/I8aP8W" %>
+                  <% end %>
+                <%end%>
+                  <span class="icon-circle-play otr"></span>
+              </div>
+              <div class="description">
+                <h4 class="title-item ellipsis">
+                  <%= link_to album.name, album_path(album) %>
+                </h4>
+                <div class="inblock ellipsis">
+                  <%= link_to album.songs.first.artist.name, artist_path(album.songs.first.artist) %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

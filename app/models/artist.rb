@@ -4,7 +4,7 @@ class Artist < ApplicationRecord
   has_many :artist_songs
   has_many :songs, through: :artist_songs
   has_many :album_artists
-  has_many :album, through: :album_artists
+  has_many :albums, through: :album_artists
 
   validates :name, presence: true, length: {minimum: 6}
   validates :type_of_music, presence: true
